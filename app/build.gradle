@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "onesource.shiftdigitalsolutions.authmodule"
@@ -27,12 +27,12 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildFeatures{
+    buildFeatures {
         dataBinding true
     }
 
-//    compileSdkVersion 31
-//    buildToolsVersion '31.0.0'
+
+    buildToolsVersion '31.0.0'
 }
 
 dependencies {
@@ -46,11 +46,11 @@ dependencies {
 
     //+ Firebase
     implementation "com.google.android.gms:play-services-auth:19.2.0"
-    implementation "com.firebaseui:firebase-ui-auth:7.2.0"
+    implementation "com.firebaseui:firebase-ui-auth:8.0.0"
 
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-scalars:2.3.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
 }
