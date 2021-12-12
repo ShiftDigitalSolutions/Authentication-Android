@@ -87,6 +87,9 @@ public class LoginActivity extends AppCompatActivity implements OnFirebaseLogin 
     }
 
     private void authenticateUsingSql(final String token, final String ssid) {
+
+        Log.d("AuthenticationTag", "SSID is: " + ssid);
+        Log.d("AuthenticationTag", "Token is: " +token);
         Client.getInstance(token, ssid)
                 .authenticate()
                 .enqueue(new Callback<ClientModel>() {
@@ -110,7 +113,6 @@ public class LoginActivity extends AppCompatActivity implements OnFirebaseLogin 
     private String getSSID() {
         @SuppressLint("HardwareIds") String ANDROID_ID = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
-        Log.d("AUTHENTICATION_TAG", ANDROID_ID);
         return ANDROID_ID;
     }
 
