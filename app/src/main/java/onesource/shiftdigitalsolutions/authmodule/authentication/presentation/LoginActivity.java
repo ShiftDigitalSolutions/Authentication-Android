@@ -118,6 +118,7 @@ public class LoginActivity extends AppCompatActivity implements OnFirebaseLogin 
 
     @Override
     public void onTokenGenerated(String token) {
+// ?       Log.d("SalamaTag", "token: " + token);
         binding.authenticationProgress.setVisibility(View.VISIBLE);
         authenticateUsingSql(token, getSSID());
     }
