@@ -12,14 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AuthModule">
         <activity
-            android:name=".authentication.presentation.LoginActivity"
-            android:exported="false" />
+            android:name="onesource.shiftdigitalsolutions.layers.presentation.ui.activity.AuthenticationActivity"
+            android:exported="true" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name="onesource.shiftdigitalsolutions.layers.presentation.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,9 +1,9 @@
-package onesource.shiftdigitalsolutions.authmodule.authentication.data.model;
+package onesource.shiftdigitalsolutions.layers.data.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ClientModel {
+public class AuthenticationUsingSqlEntity {
     @SerializedName("status")
     @Expose
     Integer statusCode;
@@ -15,7 +15,7 @@ public class ClientModel {
     String ssid;
 
 
-    public ClientModel(String ssid) {
+    public AuthenticationUsingSqlEntity(String ssid) {
         this.ssid = ssid;
     }
 

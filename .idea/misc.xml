@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../AndroidStudioProjects/Github/Auth/Authentication-Android/app/src/main/res/layout/activity_authentication.xml" value="0.1671875" />
+        <entry key="../../../../../AndroidStudioProjects/Github/Auth/Authentication-Android/app/src/main/res/layout/activity_firebase_auth.xml" value="0.1671875" />
+        <entry key="../../../../../AndroidStudioProjects/Github/Auth/Authentication-Android/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="../../../../../AndroidStudioProjects/Github/Auth/Authentication-Android/app/src/main/res/layout/activity_main.xml" value="0.1671875" />
         <entry key="..\:/Users/user/Desktop/PROJECTS_SOURCE/Auth/app/src/main/res/layout/authentication.xml" value="0.14166666666666666" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1828125" />
       </map>
