@@ -1,9 +1,5 @@
 package onesource.shiftdigitalsolutions.layers.data.repo;
 
-import android.annotation.SuppressLint;
-import android.provider.Settings;
-import android.util.Log;
-
 import onesource.shiftdigitalsolutions.layers.data.remote.ClientApi;
 import onesource.shiftdigitalsolutions.layers.data.remote.RetrofitClient;
 

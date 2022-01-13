@@ -1,7 +1,5 @@
 package onesource.shiftdigitalsolutions.layers.data.remote;
 
-import android.util.Log;
-
 import java.util.concurrent.TimeUnit;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
@@ -12,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static final String BASE_URL = "https://authmodule.azurewebsites.net/";
-    
+
     public ClientApi getRetrofitClient(final String token, final String ssid) {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(getOkHttpClient(token, ssid))
@@ -31,7 +29,8 @@ public class RetrofitClient {
                     .build();
             return chain.proceed(newRequest);
         })
-                .connectTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(90, TimeUnit.SECONDS)
                 .build();
     }
+
 }

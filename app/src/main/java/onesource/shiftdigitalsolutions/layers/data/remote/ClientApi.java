@@ -9,4 +9,8 @@ public interface ClientApi {
     @GET("validateAndSaveSSID")
     Observable<AuthenticationUsingSqlEntity> authenticate();
 
+    //? For test purpose
+    //? testing retrofit requests
+//    @GET("validateAndSaveSSID")
+//    Call<AuthenticationUsingSqlEntity> authenticateTest();
 }

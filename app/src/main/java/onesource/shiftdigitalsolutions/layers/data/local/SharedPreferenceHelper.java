@@ -3,16 +3,18 @@ package onesource.shiftdigitalsolutions.layers.data.local;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 public class SharedPreferenceHelper {
     private final SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
 
-    public SharedPreferenceHelper(SharedPreferences sharedPreferencesMode) {
+    public SharedPreferenceHelper(@NonNull SharedPreferences sharedPreferencesMode) {
         sharedPreferences = sharedPreferencesMode;
     }
 
-    public synchronized void saveObject(String key, Object value) {
+    public synchronized void saveObject(@NonNull String key, @NonNull Object value) {
 
         editor = sharedPreferences.edit();
         if (value instanceof Integer)
@@ -33,7 +35,7 @@ public class SharedPreferenceHelper {
 
     }
 
-    public synchronized Object getValue(Class<?> type, String key) {
+    public synchronized Object getValue(@NonNull Class<?> type, @NonNull String key) {
 
         if (type == Integer.class)
             return sharedPreferences.getInt(key, 0);
@@ -57,7 +59,7 @@ public class SharedPreferenceHelper {
         editor.apply();
     }
 
-    public void remove(String key) {
+    public void remove(@NonNull String key) {
         editor = sharedPreferences.edit();
         editor.remove(key);
         editor.apply();

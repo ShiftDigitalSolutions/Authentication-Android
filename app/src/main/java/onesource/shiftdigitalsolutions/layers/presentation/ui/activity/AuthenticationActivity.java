@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -14,27 +13,25 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
 import java.util.List;
 
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
-import io.reactivex.rxjava3.schedulers.Schedulers;
 import onesource.shiftdigitalsolutions.authmodule.R;
 import onesource.shiftdigitalsolutions.authmodule.databinding.ActivityAuthenticationBinding;
 import onesource.shiftdigitalsolutions.layers.data.local.SharedPreferenceHelper;
-import onesource.shiftdigitalsolutions.layers.domain.authentication.AuthenticationUseCase;
-import onesource.shiftdigitalsolutions.layers.domain.listener.FirebaseListener;
+import onesource.shiftdigitalsolutions.layers.domain.listener.AuthenticationResponse;
 import onesource.shiftdigitalsolutions.layers.presentation.presenter.OnFirebaseClientResult;
+import onesource.shiftdigitalsolutions.layers.presentation.ui.utility.Utility;
+import onesource.shiftdigitalsolutions.layers.presentation.viewmodel.AuthenticationViewMode;
 
 public class AuthenticationActivity extends AppCompatActivity implements OnFirebaseClientResult {
 
     //+ Constant region
-    private static final String TAG = "FirebaseAuthActivityTag";
     private String SQL_KEY;
     private String ANDROID_ID;
     //- End region
@@ -42,6 +39,7 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
     //+ Variable region
     private SharedPreferenceHelper sharedPreferenceHelper;
     ActivityAuthenticationBinding binding;
+    Utility utility;
     //- End region
 
     @Override
@@ -49,7 +47,6 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication);
         init();
-        startFirebaseLogin();
     }
 
     @SuppressLint("HardwareIds")
@@ -59,6 +56,13 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
         sharedPreferenceHelper = new SharedPreferenceHelper(getSharedPreferences(SHARED_PREF_KEY, MODE_PRIVATE));
         ANDROID_ID = Settings.Secure.getString(getApplicationContext().getContentResolver(),
                 Settings.Secure.ANDROID_ID);
+        utility = new Utility();
+
+        actions();
+    }
+
+    private void actions() {
+        startFirebaseLogin();
     }
 
     private void startFirebaseLogin() {
@@ -79,15 +83,10 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
         return registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
                 result -> {
-                    final IdpResponse response = IdpResponse.fromResultIntent(result.getData());
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         onFirebaseResponse(FirebaseActivityResult.SUCCESS);
                     } else {
-                        if (response != null && response.getError() != null) {
-                            onFirebaseResponse(FirebaseActivityResult.GENERAL_ERROR);
-                        } else {
-                            onFirebaseResponse(FirebaseActivityResult.FAILURE);
-                        }
+                        onFirebaseResponse(FirebaseActivityResult.FAILURE);
                     }
                 });
     }
@@ -99,45 +98,49 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
                 binding.progressBar.setVisibility(View.VISIBLE);
                 startAuthentication();
                 break;
-            case GENERAL_ERROR:
             case FAILURE:
-                Snackbar.make(binding.getRoot(), getString(R.string.something_went_wrong), Snackbar.LENGTH_LONG).show();
+                Snackbar.make(binding.getRoot(), getString(R.string.firebase_error), Snackbar.LENGTH_LONG).show();
                 new Handler().postDelayed(this::startFirebaseLogin, 3000);
                 break;
         }
     }
 
-    private void onSqlResponse(Integer code) {
-        if (code == 200) {
+    private void startAuthentication() {
+        AuthenticationViewMode authenticationViewMode =
+                new ViewModelProvider(this).get(AuthenticationViewMode.class);
+        authenticationViewMode.authenticate(ANDROID_ID);
+        authenticationViewMode.getResponse().observe(this, this::onAuthenticationComplete);
+    }
+
+    private void onAuthenticationComplete(AuthenticationResponse.ServerResponse response) {
+        if (response == AuthenticationResponse.ServerResponse.SUCCESS) {
             sharedPreferenceHelper.saveObject(SQL_KEY, 200);
             binding.progressBar.setVisibility(View.GONE);
+            //? TODO next task
             binding.done.setText("Done !!");
         } else {
             sharedPreferenceHelper.remove(SQL_KEY);
-            Snackbar.make(binding.getRoot(), getString(R.string.something_went_wrong), Snackbar.LENGTH_LONG).show();
             binding.progressBar.setVisibility(View.GONE);
+            handleErrorResponse(response);
             new Handler().postDelayed(this::startFirebaseLogin, 3000);
         }
     }
 
-    private void startAuthentication() {
-        //TODO should initialized by view model
-        AuthenticationUseCase authentication = new AuthenticationUseCase();
-        authentication.getFirebaseToken(
-                (listener, token) -> {
-                    if (listener == FirebaseListener.FirebaseListenerResult.SUCCESS) {
-                        authentication.logInUsingSql(token, ANDROID_ID)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(
-                                        r -> onSqlResponse(r.getStatusCode()),
-                                        e -> onSqlResponse(500)
-                                );
-                    } else {
-                        onSqlResponse(500);
-                    }
-                }
-        );
+    private void handleErrorResponse(AuthenticationResponse.ServerResponse response) {
+        switch (response) {
+            case LOGGED_IN_ANOTHER_DEVICE:
+                utility.displaySnakeBar(binding.getRoot(), getString(R.string.login_soon));
+                break;
+            case NETWORK_ERROR:
+                utility.displaySnakeBar(binding.getRoot(), getString(R.string.network_error));
+                break;
+            case FIREBASE_ERROR:
+                utility.displaySnakeBar(binding.getRoot(), getString(R.string.firebase_error));
+                break;
+            case SERVER_ERROR:
+                utility.displaySnakeBar(binding.getRoot(), getString(R.string.server_error));
+                break;
+        }
     }
 
 }

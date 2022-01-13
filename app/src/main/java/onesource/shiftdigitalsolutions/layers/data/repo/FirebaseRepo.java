@@ -3,8 +3,6 @@ package onesource.shiftdigitalsolutions.layers.data.repo;
 import static onesource.shiftdigitalsolutions.layers.domain.listener.FirebaseListener.FirebaseListenerResult.FAILURE;
 import static onesource.shiftdigitalsolutions.layers.domain.listener.FirebaseListener.FirebaseListenerResult.SUCCESS;
 
-import android.util.Log;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

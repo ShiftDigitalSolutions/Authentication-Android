@@ -10,19 +10,19 @@ import onesource.shiftdigitalsolutions.authmodule.R;
 import onesource.shiftdigitalsolutions.authmodule.databinding.ActivityMainBinding;
 import onesource.shiftdigitalsolutions.layers.data.local.SharedPreferenceHelper;
 
-
 public class MainActivity extends AppCompatActivity {
 
     //+ Constants region
     String SHARED_KEY;
     String SQL_KEY;
+    private static final int SUCCESS_LOGIN = 200;
     //- End region
 
-    //+ Variable region
+    //+ Variables region
     SharedPreferenceHelper sharedPreferenceHelper;
     ActivityMainBinding binding;
-
     //- End region
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkLogin() {
-        if ((int) sharedPreferenceHelper.getValue(Integer.class, SQL_KEY) != 200) {
+        if ((int) sharedPreferenceHelper.getValue(Integer.class, SQL_KEY) != SUCCESS_LOGIN) {
             startAuthenticationActivity();
         } else {
             binding.testBinding.setText("Success Login");
