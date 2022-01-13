@@ -8,9 +8,6 @@ import onesource.shiftdigitalsolutions.layers.domain.listener.FirebaseListener;
 
 public class AuthenticationUseCase implements AuthenticationCallback {
 
-    public AuthenticationUseCase() {
-    }
-
     @Override
     public void getFirebaseToken(FirebaseListener callback) {
         FirebaseRepo firebaseRepo = new FirebaseRepo();
@@ -20,7 +17,7 @@ public class AuthenticationUseCase implements AuthenticationCallback {
     @Override
     public Observable<AuthenticationUsingSqlEntity> logInUsingSql(String token, String ssid) {
         SqlRepo sqlRepo = new SqlRepo();
-        return sqlRepo.authenticate(token, ssid).authenticate();
+        return sqlRepo.authenticate(token, ssid);
     }
 
 }

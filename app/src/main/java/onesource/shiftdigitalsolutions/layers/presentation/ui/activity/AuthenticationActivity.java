@@ -27,7 +27,7 @@ import onesource.shiftdigitalsolutions.layers.data.local.SharedPreferenceHelper;
 import onesource.shiftdigitalsolutions.layers.domain.listener.AuthenticationResponse;
 import onesource.shiftdigitalsolutions.layers.presentation.presenter.OnFirebaseClientResult;
 import onesource.shiftdigitalsolutions.layers.presentation.ui.utility.Utility;
-import onesource.shiftdigitalsolutions.layers.presentation.viewmodel.AuthenticationViewMode;
+import onesource.shiftdigitalsolutions.layers.presentation.viewmodel.AuthenticationViewModel;
 
 public class AuthenticationActivity extends AppCompatActivity implements OnFirebaseClientResult {
 
@@ -106,10 +106,10 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
     }
 
     private void startAuthentication() {
-        AuthenticationViewMode authenticationViewMode =
-                new ViewModelProvider(this).get(AuthenticationViewMode.class);
-        authenticationViewMode.authenticate(ANDROID_ID);
-        authenticationViewMode.getResponse().observe(this, this::onAuthenticationComplete);
+        AuthenticationViewModel authenticationViewModel =
+                new ViewModelProvider(this).get(AuthenticationViewModel.class);
+        authenticationViewModel.authenticate(ANDROID_ID);
+        authenticationViewModel.getResponse().observe(this, this::onAuthenticationComplete);
     }
 
     private void onAuthenticationComplete(AuthenticationResponse.ServerResponse response) {

@@ -1,5 +1,7 @@
 package onesource.shiftdigitalsolutions.layers.data.repo;
 
+import io.reactivex.rxjava3.core.Observable;
+import onesource.shiftdigitalsolutions.layers.data.entity.AuthenticationUsingSqlEntity;
 import onesource.shiftdigitalsolutions.layers.data.remote.ClientApi;
 import onesource.shiftdigitalsolutions.layers.data.remote.RetrofitClient;
 
@@ -10,7 +12,7 @@ public class SqlRepo {
         retrofitClient = new RetrofitClient();
     }
 
-    public ClientApi authenticate(String token, String ssid) {
-        return retrofitClient.getRetrofitClient(token, ssid);
+    public Observable<AuthenticationUsingSqlEntity> authenticate(String token, String ssid) {
+        return retrofitClient.getRetrofitClient(token, ssid).authenticate();
     }
 }
