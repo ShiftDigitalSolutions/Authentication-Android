@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">Auth Module</string>
+
+    <!--    Keys-->
     <string name="shared_preference_key">SHARED_PREFERENCE_KEY</string>
     <string name="sql_authentication_success_key">SQL_AUTH_SUCCESS_KEY</string>
+
+    <!--    error text-->
     <string name="something_went_wrong">Something Went Wrong, please retry</string>
     <string name="firebase_error">unstable internet connection</string>
     <string name="network_error">unstable internet connection</string>
+    <string name="invalid_token">invalid token</string>
+    <string name="user_not_found">user not found</string>
     <string name="login_soon">many attempt in the same time from another device</string>
     <string name="server_error">server in maintenance</string>
 </resources>

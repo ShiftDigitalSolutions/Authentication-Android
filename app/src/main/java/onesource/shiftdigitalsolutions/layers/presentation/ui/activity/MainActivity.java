@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         SQL_KEY = getString(R.string.sql_authentication_success_key);
         sharedPreferenceHelper = new SharedPreferenceHelper(getSharedPreferences(SHARED_KEY, MODE_PRIVATE));
 
-        sharedPreferenceHelper.clear();
+//        sharedPreferenceHelper.clear();
         checkLogin();
     }
 

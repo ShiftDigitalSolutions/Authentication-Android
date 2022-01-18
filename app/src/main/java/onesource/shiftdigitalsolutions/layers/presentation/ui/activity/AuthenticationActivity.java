@@ -131,6 +131,9 @@ public class AuthenticationActivity extends AppCompatActivity implements OnFireb
             case LOGGED_IN_ANOTHER_DEVICE:
                 utility.displaySnakeBar(binding.getRoot(), getString(R.string.login_soon));
                 break;
+            case INVALID_TOKEN:
+                utility.displaySnakeBar(binding.getRoot(), getString(R.string.invalid_token));
+                break;
             case NETWORK_ERROR:
                 utility.displaySnakeBar(binding.getRoot(), getString(R.string.network_error));
                 break;
