@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "908985793816-o0v0ulipg5i7va8e8f4374fspc9o619h.apps.googleusercontent.com",
+          "client_id": "908985793816-difh50ugknv0vlc4p2h7hvs3r55sjf6t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "onesource.shiftdigitalsolutions.authmodule",
-            "certificate_hash": "d41705c0f5e047d7cf1f7b1c3342b2f432c48c06"
+            "certificate_hash": "b9d75b1776c57d98f8ff238f34f7bc3c8d179bcb"
           }
         },
         {

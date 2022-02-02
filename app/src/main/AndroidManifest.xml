@@ -12,10 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AuthModule">
         <activity
-            android:name=".authentication.presentation.LoginActivity"
+            android:name=".presentation.ui.activity.ErrorScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".presentation.ui.activity.BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.AuthenticationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
