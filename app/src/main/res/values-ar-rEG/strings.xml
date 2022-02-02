@@ -1,0 +1,37 @@
+<resources>
+
+    <!--    error text-->
+    <string name="something_went_wrong">حدث خطأ ما برجاء اعادة المحاولة</string>
+    <string name="success_with_no_data">لا يوجد اي معلومات</string>
+    <string name="firebase_error">مستخدم غير صحيح برجاء اعادة المحاولة</string>
+    <string name="network_error">برجاء التأكد من الانترنت</string>
+    <string name="invalid_token">مستخدم غير صحيح</string>
+    <string name="user_not_found">المستخدم غير مسجل</string>
+    <string name="login_soon">العديد من المحاولات من اجهزه مختلفه</string>
+    <string name="server_error">يجري الان صيانه في الخادم</string>
+    <string name="bad_gateway">الخادم في حالة صيانه برجاء اعادة المحاوله في وقت لاحق</string>
+    <string name="nothing_to_preview">لا يوجد اي شئ لعرضه</string>
+    <string name="empty_field">برجاء ملئ الحقل الفارغ</string>
+
+    <!--    home screen layout text-->
+
+
+    <!-- navigation drawer text -->
+    <string name="home_screen">الصفحة الرئيسية</string>
+    <string name="settings">الإعدادات</string>
+    <string name="logout">تسجيل الخروج</string>
+
+    <!--    settings screen -->
+    <string-array name="languages">
+        <item>لا شئ</item>
+        <item>الإنجليزية</item>
+        <item>العربية</item>
+    </string-array>
+    <string name="language">اللغة:</string>
+
+    <!--    error screen-->
+    <string name="error_screen_retry">اعادة المحاولة</string>
+    <string name="error_screen_close">اغلاق</string>
+    <string name="server_in_maintenance_text">الخادم في حالة صيانة برجاء المحاولة لاحقا</string>
+
+</resources>
